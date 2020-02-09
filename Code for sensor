@@ -1,0 +1,53 @@
+int sensorPin = A0; 
+int sensorValue = 0; 
+int red_light_pin =11;
+int green_light_pin=10;
+int blue_light_pin=9;
+
+void setup() 
+{
+pinMode (A0,INPUT);
+pinMode (11,OUTPUT);
+pinMode (10,OUTPUT);
+pinMode (9,OUTPUT);
+Serial.begin(9600);
+}
+void loop()
+ {
+RGB_color(255, 0, 0); // Red Led
+delay(2000);
+RGB_color(0, 255, 0); // Green Led
+delay(2000);
+RGB_color(0, 0, 255); // Blue Led
+delay(2000);  
+sensorValue = analogRead(sensorPin);
+Serial.println(sensorValue);
+analogWrite(11, map(sensorValue, 0, 1023, 0, 255));
+delay(1000);
+if (sensorValue>100) 
+{ 
+Serial.println("WHITE"); 
+}
+else if (sensorValue<= 265 && sensorValue >202) 
+{
+Serial.println("RED");
+} 
+else if (sensorValue>=276 && sensorValue<325) 
+{
+Serial.println("GREEN"); 
+} 
+else if (sensorValue<124 && sensorValue>79) 
+{
+Serial.println("BLUE");   
+}
+else if (sensorValue<58)
+{
+Serial.println("DARK");
+}
+}
+voidRGB_color(intred_led_value,intblue_led_value,int green_led_value)
+{ 
+analogWrite(red_light_pin, red_led_value); 
+analogWrite(green_light_pin,green_led_valu);
+analogWrite(blue_light_pin, blue_led_value);
+}
